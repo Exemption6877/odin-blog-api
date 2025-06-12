@@ -3,6 +3,9 @@ const postController = require("../controllers/postsController");
 
 const postsRouter = Router();
 
+const commentsRouter = require("./commentsRouter");
+postsRouter.use("/:postId/comments", commentsRouter);
+
 postsRouter.post("/", postController.createPost);
 postsRouter.get("/", postController.getAllPosts);
 postsRouter.get("/:id", postController.getPostById);
