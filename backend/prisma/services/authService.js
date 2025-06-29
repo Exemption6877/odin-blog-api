@@ -13,4 +13,12 @@ async function createUser(username, password) {
   }
 }
 
-module.exports = { createUser };
+async function getByName(username) {
+  try {
+    return await prisma.user.findUnique({ username });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = { createUser, getByName };
