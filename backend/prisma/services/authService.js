@@ -15,7 +15,7 @@ async function createUser(username, password) {
 
 async function getByName(username) {
   try {
-    return await prisma.user.findUnique({ username });
+    return await prisma.user.findUnique({ where: { username } });
   } catch (err) {
     console.log(err);
   }
