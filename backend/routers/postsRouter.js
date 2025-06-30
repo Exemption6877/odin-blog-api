@@ -4,12 +4,13 @@ const postController = require("../controllers/postsController");
 const postsRouter = Router();
 
 const commentsRouter = require("./commentsRouter");
+const { verifyToken } = require("../middleware/verifyToken");
 postsRouter.use("/:postId/comments", commentsRouter);
 
-postsRouter.post("/", postController.createPost);
+postsRouter.post("/", verifyToken, postController.createPost);
 postsRouter.get("/", postController.getAllPosts);
 postsRouter.get("/:id", postController.getPostById);
-postsRouter.put("/:id", postController.updatePost);
-postsRouter.delete("/:id", postController.deletePost);
+postsRouter.put("/:id", verifyToken, postController.updatePost);
+postsRouter.delete("/:id", verifyToken, postController.deletePost);
 
 module.exports = postsRouter;

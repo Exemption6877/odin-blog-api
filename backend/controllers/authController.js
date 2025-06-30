@@ -32,11 +32,15 @@ async function login(req, res) {
       return new Error("Invalid Credentials");
     }
 
-    jwt.sign({ user: user }, JWT_SECRET, (err, token) => {
-      res.json({
-        token,
-      });
-    });
+    jwt.sign(
+      { id: user.id, username: user.username, role: user.role },
+      JWT_SECRET,
+      (err, token) => {
+        res.json({
+          token,
+        });
+      }
+    );
   } catch (err) {
     console.log(err);
   }
