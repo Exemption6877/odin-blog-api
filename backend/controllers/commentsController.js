@@ -22,7 +22,8 @@ async function createComment(req, res) {
 
 async function getAllComments(req, res) {
   try {
-    const comments = await db.comments.getAll();
+    const postId = Number(req.params.postId);
+    const comments = await db.comments.getAllByPostId(postId);
 
     if (comments.length === 0) {
       return res.status(404).json({ error: "No comments found." });
@@ -64,6 +65,7 @@ async function updateComment(req, res) {
     const { commentText } = req.body;
     const postId = Number(req.params.postId);
     const commentId = Number(req.params.id);
+    const userId = req.user.id;
 
     const post = await db.posts.findById(postId);
 
@@ -75,6 +77,10 @@ async function updateComment(req, res) {
 
     if (!comment) {
       return res.status(404).json({ error: "Comment not found." });
+    }
+
+    if (comment.userId !== userId) {
+      return res.status(403).json({ error: "Insufficient privileges." });
     }
 
     const updatedComment = await db.comments.updateById(commentId, commentText);
@@ -89,6 +95,12 @@ async function deleteComment(req, res) {
   try {
     const postId = Number(req.params.postId);
     const commentId = Number(req.params.id);
+
+    const userRole = req.user.role;
+
+    if (userRole !== "ADMIN") {
+      return res.status(403).json({ error: "Insufficient privileges." });
+    }
 
     const post = await db.posts.findById(postId);
 
