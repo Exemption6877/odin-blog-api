@@ -18,11 +18,10 @@ async function findById(id) {
   }
 }
 
-async function create(title, content, createdAt, published, userId) {
+async function create(title, content, published, userId) {
   try {
     await prisma.post.create({
       data: {
-        createdAt: createdAt,
         published: published,
         title: title,
         content: content,

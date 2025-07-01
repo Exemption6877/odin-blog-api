@@ -11,10 +11,9 @@ async function createPost(req, res) {
 
     const { title, content, publishedString } = req.body;
     const published = publishedString === "true";
-    const now = new Date();
     const userId = req.user.id;
 
-    await db.posts.create(title, content, now, published, userId);
+    await db.posts.create(title, content, published, userId);
     res.status(201).json({ message: "Post created successfully." });
   } catch (err) {
     console.error(err);
