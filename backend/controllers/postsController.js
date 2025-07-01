@@ -3,71 +3,113 @@ const { findById } = require("../prisma/services/postsService");
 
 async function createPost(req, res) {
   try {
+    const userRole = req.user.role;
+
+    if (userRole !== "ADMIN") {
+      return res.status(403).json({ error: "Insufficient privileges." });
+    }
+
     const { title, content, publishedString } = req.body;
     const published = publishedString === "true";
     const now = new Date();
     const userId = req.user.id;
-    console.log(userId);
 
     await db.posts.create(title, content, now, published, userId);
-    res.status(201).json({ message: "Post created successfully" });
+    res.status(201).json({ message: "Post created successfully." });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Failed to create post." });
   }
 }
 
 async function getAllPosts(req, res) {
   try {
     const posts = await db.posts.getAll();
-    res.json(posts);
+
+    if (posts.length === 0) {
+      return res.status(404).json({ error: "No posts found." });
+    }
+
+    res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch posts." });
   }
 }
 
 async function getPostById(req, res) {
   try {
     const postId = Number(req.params.id);
-    const post = await db.posts.findByIdyId(postId);
-    res.json(post);
-    //
+    const post = await db.posts.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found." });
+    }
+
+    res.status(200).json(post);
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch post." });
   }
 }
 
 async function updatePost(req, res) {
   try {
+    const userRole = req.user.role;
+
+    if (userRole !== "ADMIN") {
+      return res.status(403).json({ error: "Insufficient privileges." });
+    }
+
     const postId = Number(req.params.id);
     const post = await findById(postId);
-    console.log(post);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found." });
+    }
+
     const title = req.body.title === undefined ? post.title : req.body.title;
     const content =
       req.body.content === undefined ? post.content : req.body.content;
     const published =
-      req.body.published === undefined ? post.published : !post.published;
+      req.body.published === undefined
+        ? post.published
+        : req.body.published === "true";
 
-    res.json(await db.posts.updateById(postId, title, content, published));
+    const updatedPost = await db.posts.updateById(
+      postId,
+      title,
+      content,
+      published
+    );
+
+    res.status(200).json(updatedPost);
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Failed to update post." });
   }
 }
 
 async function deletePost(req, res) {
   try {
-    const postId = Number(req.params.id);
     const userRole = req.user.role;
-    console.log(userRole);
 
     if (userRole !== "ADMIN") {
-      return res
-        .status(403)
-        .json({ message: "Error: user is not administrator" });
+      return res.status(403).json({ error: "Insufficient privileges." });
     }
+
+    const postId = Number(req.params.id);
+    const post = await findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found." });
+    }
+
     await db.posts.deleteById(postId);
-    res.status(201).json({ message: "Post deleted successfully" });
+    res.status(200).json({ message: "Post deleted successfully." });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete post." });
   }
 }
 

@@ -10,9 +10,7 @@ async function signUp(req, res) {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    console.log(username, hashedPassword);
-    const user = await db.auth.createUser(username, hashedPassword);
-    console.log(user);
+    await db.auth.createUser(username, hashedPassword);
   } catch (err) {
     console.log(err);
   }

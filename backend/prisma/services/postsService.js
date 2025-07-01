@@ -1,5 +1,7 @@
 const prisma = require("../prisma");
 
+// Do statuses with messages instead of console logging
+
 async function getAll() {
   try {
     return await prisma.post.findMany();
