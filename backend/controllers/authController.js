@@ -5,9 +5,16 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 const saltRounds = 10;
 
+const { validationResult } = require("express-validator");
+
 async function signUp(req, res) {
   try {
     const { username, password } = req.body;
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      return res.status(400).json({ errors: validationErrors.array() });
+    }
+
     const user = await db.auth.getByName(username);
 
     if (user) {
