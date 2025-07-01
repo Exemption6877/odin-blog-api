@@ -8,11 +8,19 @@ const saltRounds = 10;
 async function signUp(req, res) {
   try {
     const { username, password } = req.body;
+    const user = await db.auth.getByName(username);
+
+    if (user) {
+      return res.status(403).json({ error: "User already exists." });
+    }
+
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     await db.auth.createUser(username, hashedPassword);
+    res.status(200).json({ message: "User has been created." });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Could not create user." });
   }
 }
 
@@ -22,17 +30,18 @@ async function login(req, res) {
     const user = await db.auth.getByName(username);
 
     if (!user) {
-      return new Error("Invalid Credentials");
+      return res.status(401).json({ error: "Invalid credentials." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return new Error("Invalid Credentials");
+      return res.status(401).json({ error: "Invalid credentials." });
     }
 
     jwt.sign(
       { id: user.id, username: user.username, role: user.role },
       JWT_SECRET,
+      { expiresIn: "1h" },
       (err, token) => {
         res.json({
           token,
@@ -40,7 +49,8 @@ async function login(req, res) {
       }
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).json({ error: "Could not login user." });
   }
 }
 

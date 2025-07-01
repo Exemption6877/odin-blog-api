@@ -12,10 +12,10 @@ function verifyToken(req, res, next) {
 
       next();
     } catch (err) {
-      return res.status(401).json({ message: "Invalid token" });
+      return res.status(401).json({ message: "Missing token." });
     }
   } else {
-    res.sendStatus(403);
+    res.status(401).json({ error: "Invalid token." });
   }
 }
 
