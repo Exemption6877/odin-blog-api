@@ -22,6 +22,17 @@ async function getAllByPostId(postId) {
   }
 }
 
+async function getByIdAndPostId(id, postId) {
+  try {
+    return await prisma.comment.findFirst({
+      where: { id: id, postId: postId },
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Database: Failed to fetch comment.");
+  }
+}
+
 async function createForPostId(content, userId, postId) {
   try {
     await prisma.comment.create({
@@ -59,10 +70,10 @@ async function updateById(id, content) {
   }
 }
 
-async function deleteById(id) {
+async function deleteById(id, postId) {
   try {
     await prisma.comment.delete({
-      where: { id: id },
+      where: { id: id, postId: postId },
     });
   } catch (err) {
     console.error(err);
@@ -73,6 +84,7 @@ async function deleteById(id) {
 module.exports = {
   getAll,
   getAllByPostId,
+  getByIdAndPostId,
   createForPostId,
   updateById,
   deleteById,

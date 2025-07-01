@@ -1,5 +1,4 @@
 const db = require("../prisma/queries");
-const { findById } = require("../prisma/services/postsService");
 
 async function createPost(req, res) {
   try {
