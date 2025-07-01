@@ -10,7 +10,8 @@ async function create(username, password, role) {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to create user.");
   }
 }
 
@@ -18,7 +19,8 @@ async function getAll() {
   try {
     return await prisma.user.findMany();
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to fetch all users.");
   }
 }
 
@@ -26,7 +28,8 @@ async function getById(id) {
   try {
     return await prisma.user.findUnique({ id });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to fetch user.");
   }
 }
 
@@ -39,7 +42,8 @@ async function updateUsername(id, username) {
       },
     });
   } catch (err) {
-    throw new Error("Database: Could not update username", err);
+    console.error(err);
+    throw new Error("Database: Failed to update username.");
   }
 }
 
@@ -52,7 +56,8 @@ async function updatePassword(id, password) {
       },
     });
   } catch (err) {
-    throw new Error("Database: Could not update password", err);
+    console.error(err);
+    throw new Error("Database: Failed to update user password.");
   }
 }
 

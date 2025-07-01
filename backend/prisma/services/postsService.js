@@ -1,12 +1,11 @@
 const prisma = require("../prisma");
 
-// Do statuses with messages instead of console logging
-
 async function getAll() {
   try {
     return await prisma.post.findMany();
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to fetch posts.");
   }
 }
 
@@ -14,7 +13,8 @@ async function findById(id) {
   try {
     return await prisma.post.findUnique({ where: { id: id } });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to fetch post.");
   }
 }
 
@@ -34,7 +34,8 @@ async function create(title, content, createdAt, published, userId) {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to create post.");
   }
 }
 
@@ -51,7 +52,8 @@ async function updateById(id, title, content, published) {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to update post.");
   }
 }
 
@@ -59,8 +61,9 @@ async function deleteById(id) {
   try {
     await prisma.post.delete({ where: { id: id } });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to delete post.");
   }
 }
 
-module.exports = { getAll, create, findById, deleteById, updateById };
+module.exports = { getAll, findById, create, updateById, deleteById };

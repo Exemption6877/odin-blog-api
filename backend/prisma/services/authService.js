@@ -9,7 +9,8 @@ async function createUser(username, password) {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to create user.");
   }
 }
 
@@ -17,7 +18,8 @@ async function getByName(username) {
   try {
     return await prisma.user.findUnique({ where: { username } });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw new Error("Database: Failed to fetch user.");
   }
 }
 
