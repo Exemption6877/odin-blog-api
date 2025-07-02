@@ -7,9 +7,7 @@ function verifyToken(req, res, next) {
     const bearerToken = bearer[1];
     req.token = bearerToken;
     try {
-      const decoded = jwt.verify(bearerToken, process.env.JWT_SECRET);
-      req.user = decoded;
-
+      req.user = jwt.verify(bearerToken, process.env.JWT_SECRET);
       next();
     } catch (err) {
       return res.status(401).json({ message: "Missing token." });
@@ -19,4 +17,14 @@ function verifyToken(req, res, next) {
   }
 }
 
-module.exports = { verifyToken };
+function verifyAdmin(req, res, next) {
+  const userRole = req.user.role;
+
+  if (!req.user || userRole !== "ADMIN") {
+    return res.status(403).json({ message: "Insufficient privileges." });
+  }
+
+  next();
+}
+
+module.exports = { verifyToken, verifyAdmin };

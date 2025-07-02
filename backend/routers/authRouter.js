@@ -20,6 +20,8 @@ authRouter.post(
   ],
   authController.signUp
 );
+
+// TODO: delete cookie/localstorage
 authRouter.post("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);

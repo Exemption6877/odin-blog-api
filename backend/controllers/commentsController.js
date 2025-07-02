@@ -66,6 +66,7 @@ async function updateComment(req, res) {
     const postId = Number(req.params.postId);
     const commentId = Number(req.params.id);
     const userId = req.user.id;
+    const userRole = req.user.role;
 
     const post = await db.posts.findById(postId);
 
@@ -79,7 +80,7 @@ async function updateComment(req, res) {
       return res.status(404).json({ error: "Comment not found." });
     }
 
-    if (comment.userId !== userId) {
+    if (comment.userId !== userId && userRole !== "ADMIN") {
       return res.status(403).json({ error: "Insufficient privileges." });
     }
 
@@ -93,20 +94,7 @@ async function updateComment(req, res) {
 
 async function deleteComment(req, res) {
   try {
-    const postId = Number(req.params.postId);
     const commentId = Number(req.params.id);
-
-    const userRole = req.user.role;
-
-    if (userRole !== "ADMIN") {
-      return res.status(403).json({ error: "Insufficient privileges." });
-    }
-
-    const post = await db.posts.findById(postId);
-
-    if (!post) {
-      return res.status(404).json({ error: "Post not found." });
-    }
 
     const comment = await db.comments.getByIdAndPostId(commentId, postId);
 
@@ -114,7 +102,7 @@ async function deleteComment(req, res) {
       return res.status(404).json({ error: "Comment not found." });
     }
 
-    await db.comments.deleteById(commentId, postId);
+    await db.comments.deleteById(commentId, comment.postId);
 
     res.status(200).json({ message: "Comment deleted successfully." });
   } catch (err) {

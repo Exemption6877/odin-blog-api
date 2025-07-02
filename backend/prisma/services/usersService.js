@@ -61,10 +61,49 @@ async function updatePassword(id, password) {
   }
 }
 
+async function getAllComments(id) {
+  try {
+    return await prisma.comment.findMany({
+      where: { userId: id },
+      include: {
+        post: {
+          select: {
+            title: true,
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Database: Failed to fetch user comments.");
+  }
+}
+
+async function deleteUser(id) {
+  try {
+    await prisma.user.delete({ where: { id: id } });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Database: Failed to delete user.");
+  }
+}
+
+async function getAllPosts(id) {
+  try {
+    return await prisma.post.findMany({ where: { userId: id } });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Database: Failed to fetch user posts.");
+  }
+}
+
 module.exports = {
   create,
   getAll,
   getById,
   updateUsername,
   updatePassword,
+  getAllComments,
+  deleteUser,
+  getAllPosts,
 };

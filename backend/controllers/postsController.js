@@ -2,12 +2,6 @@ const db = require("../prisma/queries");
 
 async function createPost(req, res) {
   try {
-    const userRole = req.user.role;
-
-    if (userRole !== "ADMIN") {
-      return res.status(403).json({ error: "Insufficient privileges." });
-    }
-
     const { title, content, publishedString } = req.body;
     const published = publishedString === "true";
     const userId = req.user.id;
@@ -53,12 +47,6 @@ async function getPostById(req, res) {
 
 async function updatePost(req, res) {
   try {
-    const userRole = req.user.role;
-
-    if (userRole !== "ADMIN") {
-      return res.status(403).json({ error: "Insufficient privileges." });
-    }
-
     const postId = Number(req.params.id);
     const post = await findById(postId);
 
@@ -90,12 +78,6 @@ async function updatePost(req, res) {
 
 async function deletePost(req, res) {
   try {
-    const userRole = req.user.role;
-
-    if (userRole !== "ADMIN") {
-      return res.status(403).json({ error: "Insufficient privileges." });
-    }
-
     const postId = Number(req.params.id);
     const post = await findById(postId);
 
