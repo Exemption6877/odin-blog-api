@@ -1,6 +1,7 @@
 import styles from "./App.module.css";
 import Footer from "./components/footer";
 import Nav from "./components/nav";
+import Posts from "./components/Posts";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Nav />
       <main className={styles.mainContent}>
         <h1>Content here</h1>
+        <Posts />
       </main>
       <Footer />
     </div>
