@@ -1,4 +1,4 @@
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 
 function Posts() {
   const API_URL = import.meta.env.VITE_API_URL;
