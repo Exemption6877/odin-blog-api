@@ -1,21 +1,23 @@
 import useFetch from "../../../hooks/useFetch";
+import Post from "./components/Post";
 
 function Posts() {
   const API_URL = import.meta.env.VITE_API_URL;
   const { error, loading, data } = useFetch(`${API_URL}/posts`);
 
-  if (error) return <div>Error: {error}</div>;
-  if (loading) return <div>Loading...</div>;
-  if (!data) return <div>Post Not Found.</div>;
+  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (!data) return <p>Post Not Found.</p>;
 
   return (
     <div key={data.id}>
       {data.map((post) => (
-        <div className="post" key={post.id}>
-          <p>{post.id}</p>
-          <p>{post.title}</p>
-          <p>{post.content}</p>
-        </div>
+        <Post
+          key={post.id}
+          link={`/posts/${post.id}`}
+          title={post.title}
+          createdAt={post.createdAt}
+        />
       ))}
     </div>
   );

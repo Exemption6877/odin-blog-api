@@ -1,9 +1,8 @@
 import useFetch from "../../../../hooks/useFetch";
-import { useParams } from "react-router-dom";
+import Comment from "./Comment";
 
-function Comments() {
+function Comments({ postId }) {
   const API_URL = import.meta.env.VITE_API_URL;
-  const { postId } = useParams();
   const { error, loading, data } = useFetch(
     `${API_URL}/posts/${postId}/comments`
   );
@@ -16,9 +15,7 @@ function Comments() {
     <div>
       <h3>Comments</h3>
       {data.map((comment) => (
-        <div key={comment.id}>
-          <p>{comment.content}</p>
-        </div>
+        <Comment key={comment.id} content={comment.content} />
       ))}
     </div>
   );

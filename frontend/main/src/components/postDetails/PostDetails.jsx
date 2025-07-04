@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import Comments from "./components/Comments";
+import { Link } from "react-router-dom";
 
 function PostDetails() {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -10,13 +11,12 @@ function PostDetails() {
   if (loading) return <div>Loading...</div>;
   if (!data) return <div>Post Not Found.</div>;
 
-  //
-
   return (
     <div key={data.id}>
+      <Link to="/">Go back</Link>
       <h2>{data.title}</h2>
       <p>{data.content}</p>
-      <Comments />
+      <Comments postId={postId} />
     </div>
   );
 }
