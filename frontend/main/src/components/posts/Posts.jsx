@@ -1,5 +1,6 @@
 import useFetch from "../../../hooks/useFetch";
 import Post from "./components/Post";
+import AuthContext from "../../context/authContext";
 
 function Posts() {
   const API_URL = import.meta.env.VITE_API_URL;

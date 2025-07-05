@@ -9,10 +9,10 @@ function Nav() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="">Sign Up</a>
+          <a href="/auth/signup">Sign Up</a>
         </li>
         <li>
-          <a href="">Log In</a>
+          <a href="/auth/login">Log In</a>
         </li>
       </ul>
     </nav>
