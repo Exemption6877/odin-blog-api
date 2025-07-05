@@ -1,31 +1,32 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/authContext";
 
-function Login() {
-  const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
-  const { login } = useContext(AuthContext);
+function Login() {
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
+  const [error, setError] = useState(null);
+
+  const { login } = useContext(AuthContext);
+
   const handleTyping = (e) => {
     const { name, value } = e.target;
 
-    if (name === "username") {
-      setCredentials((prev) => ({
-        ...prev,
-        username: value,
-      }));
+    if (name !== "username" && name !== "password") {
+      return;
     }
 
-    if (name === "password") {
-      setCredentials((prev) => ({
-        ...prev,
-        password: value,
-      }));
-    }
+    setCredentials((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -39,16 +40,20 @@ function Login() {
       }),
     });
 
-    if (res.status !== 200) {
-      return new Error("incorrect credentials");
+    if (!res.ok) {
+      const errorData = await res.json();
+      setError(errorData.error);
+      return;
     }
 
     const data = await res.json();
     login(data.token, credentials.username);
+    navigate("/", { replace: true });
   };
 
   return (
-    <div>
+    <>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -66,7 +71,7 @@ function Login() {
         />
         <input type="submit" value="submit" />
       </form>
-    </div>
+    </>
   );
 }
 
