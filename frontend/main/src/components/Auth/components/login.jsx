@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../../context/authContext";
+import styles from "../Auth.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -52,8 +53,9 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.formBlock}>
       {error && <p>{error}</p>}
+      <h2>Log In</h2>
       <label htmlFor="username">Username</label>
       <input
         type="text"
@@ -70,7 +72,13 @@ function Login() {
         onChange={handleTyping}
         value={credentials.password}
       />
-      <input type="submit" value="submit" />
+      <input type="submit" value="Log In" />
+      <p>
+        Do not have an account?{" "}
+        <Link to="/auth/signup" className={styles.authLink}>
+          Sign Up
+        </Link>
+      </p>
     </form>
   );
 }

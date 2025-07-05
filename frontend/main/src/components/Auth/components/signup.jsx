@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import styles from "../Auth.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -58,8 +59,9 @@ function Signup() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.formBlock}>
       {error && <p>{error}</p>}
+      <h2>Sign Up</h2>
       <label htmlFor="username">Username</label>
       <input
         type="text"
@@ -84,7 +86,13 @@ function Signup() {
         onChange={handleTyping}
         value={credentials.confirmPassword}
       />
-      <input type="submit" value="submit" />
+      <input type="submit" value="Sign Up" />
+      <p>
+        Already registered?{" "}
+        <Link to="/auth/login" className={styles.authLink}>
+          Log In
+        </Link>
+      </p>
     </form>
   );
 }

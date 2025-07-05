@@ -1,0 +1,39 @@
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--accent-color);
+  color: var(--text-white-color);
+  padding: var(--auth-padding);
+  gap: var(--auth-gap);
+  border-radius: var(--auth-radius);
+  position: relative;
+  top: 50%;
+}
+
+.formBlock > h2,
+.formBlock > p {
+  align-self: center;
+}
+
+.formBlock > label {
+  font-weight: 600;
+}
+
+.formBlock > input[type="text"],
+input[type="password"] {
+  border-radius: var(--auth-radius);
+  width: 250px;
+}
+
+.formBlock > input[type="submit"] {
+  padding: 0.5rem;
+  background-color: var(--secondary-button-color);
+  border-radius: var(--auth-radius);
+  border: none;
+  cursor: pointer;
+}
+
+.authLink {
+  color: var(--text-black-color);
+  text-decoration: none;
+}
