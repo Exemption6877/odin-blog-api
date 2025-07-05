@@ -62,6 +62,7 @@ function Login() {
           name="password"
           id="password"
           onChange={handleTyping}
+          value={credentials.password}
         />
         <input type="submit" value="submit" />
       </form>

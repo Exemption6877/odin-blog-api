@@ -4,6 +4,7 @@ import Posts from "./components/Posts/Posts";
 import PostDetails from "./components/PostDetails/PostDetails";
 import Login from "./components/auth/login";
 import Auth from "./Auth";
+import Signup from "./components/auth/signup";
 
 const routes = [
   { path: "/", element: <Navigate to="/posts" replace /> },
@@ -18,7 +19,11 @@ const routes = [
   {
     path: "/auth",
     element: <Auth />,
-    children: [{ index: false }, { path: "login", element: <Login /> }],
+    children: [
+      { index: false },
+      { path: "login", element: <Login /> },
+      { path: "signup", element: <Signup /> },
+    ],
   },
 ];
 
