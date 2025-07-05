@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import App from "./App";
 import Posts from "./components/Posts/Posts";
 import PostDetails from "./components/PostDetails/PostDetails";
-import Login from "./components/auth/login";
-import Auth from "./Auth";
-import Signup from "./components/auth/signup";
+import Login from "./components/Auth/components/login";
+import Auth from "./components/Auth/Auth";
+import Signup from "./components/Auth/components/signup";
 
 const routes = [
   { path: "/", element: <Navigate to="/posts" replace /> },
