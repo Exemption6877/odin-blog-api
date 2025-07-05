@@ -9,7 +9,7 @@ function Signup() {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
   });
 
   const [error, setError] = useState(null);
@@ -20,7 +20,7 @@ function Signup() {
     if (
       name !== "username" &&
       name !== "password" &&
-      name !== "confirmpassword"
+      name !== "confirmPassword"
     ) {
       return;
     }
@@ -34,7 +34,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (credentials.password !== credentials.confirmpassword) {
+    if (credentials.password !== credentials.confirmPassword) {
       setError("Password does not match.");
       return;
     }
@@ -61,6 +61,7 @@ function Signup() {
     <>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
@@ -68,6 +69,7 @@ function Signup() {
           onChange={handleTyping}
           value={credentials.username}
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
@@ -75,12 +77,13 @@ function Signup() {
           onChange={handleTyping}
           value={credentials.password}
         />
-
+        <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           type="password"
-          name="confirmpassword"
+          name="confirmPassword"
+          id="confirmPassword"
           onChange={handleTyping}
-          value={credentials.confirmpassword}
+          value={credentials.confirmPassword}
         />
         <input type="submit" value="submit" />
       </form>

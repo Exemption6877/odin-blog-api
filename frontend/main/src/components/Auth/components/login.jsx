@@ -55,6 +55,7 @@ function Login() {
     <>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
@@ -62,6 +63,7 @@ function Login() {
           onChange={handleTyping}
           value={credentials.username}
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
