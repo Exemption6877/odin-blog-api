@@ -4,7 +4,7 @@ import AuthContext from "../../context/authContext";
 function Login() {
   const API_URL = import.meta.env.VITE_API_URL;
 
-  const { token, setToken } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -44,11 +44,8 @@ function Login() {
     }
 
     const data = await res.json();
-    localStorage.setItem("token", data.token);
-    setToken(data.token);
+    login(data.token, credentials.username);
   };
-
-  console.log(token);
 
   return (
     <div>
