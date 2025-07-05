@@ -22,10 +22,10 @@ function Nav() {
         ) : (
           <>
             <li>
-              <Link to="/auth/signup">Sign Up</Link>
+              <Link to="/auth/login">Log In</Link>
             </li>
             <li>
-              <Link to="/auth/login">Log In</Link>
+              <Link to="/auth/signup">Sign Up</Link>
             </li>
           </>
         )}
