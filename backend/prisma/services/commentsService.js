@@ -15,6 +15,13 @@ async function getAllByPostId(postId) {
       where: {
         postId: postId,
       },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
   } catch (err) {
     console.error(err);
@@ -26,6 +33,13 @@ async function getByIdAndPostId(id, postId) {
   try {
     return await prisma.comment.findFirst({
       where: { id: id, postId: postId },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
   } catch (err) {
     console.error(err);
