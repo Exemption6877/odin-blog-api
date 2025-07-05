@@ -1,20 +1,18 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function NewComment({ token, postId }) {
-  const API_URL = import.meta.env.VITE_API_URL;
-
   const [content, setContent] = useState("");
-  const handleTyping = (e) => {
-    const { name, value } = e.target;
+  const [error, setError] = useState(null);
 
-    if (name === "commentText") {
-      setContent(value);
-    }
+  const handleTyping = (e) => {
+    setContent(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(token);
+  const handleSubmit = async () => {
+    // I could make this more responsive if API could return commentId,
+    // To show comment without updating the whole page, but I will leave it for now.
     const res = await fetch(`${API_URL}/posts/${postId}/comments`, {
       method: "POST",
       headers: {
@@ -25,23 +23,25 @@ function NewComment({ token, postId }) {
         commentText: content,
       }),
     });
-    if (res.status !== 200) {
-      return new Error("error creating comment");
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      setError(errorData.error);
+      return;
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          name="commentText"
-          id="commentText"
-          value={content}
-          onChange={handleTyping}
-        ></textarea>
-        <input type="submit" value="submit" />
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
+      <textarea
+        name="commentText"
+        id="commentText"
+        value={content}
+        onChange={handleTyping}
+      ></textarea>
+      <input type="submit" value="submit" />
+    </form>
   );
 }
 

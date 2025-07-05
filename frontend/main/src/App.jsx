@@ -1,14 +1,9 @@
+import { Outlet } from "react-router-dom";
 import styles from "./App.module.css";
 import Footer from "./components/layout/Footer";
 import Nav from "./components/layout/Nav";
-import { Outlet } from "react-router-dom";
-import AuthContext from "./context/authContext";
-import { useContext } from "react";
 
 function App() {
-  const { token } = useContext(AuthContext);
-
-  console.log(token);
   return (
     <div className={styles.appWrapper}>
       <Nav />

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-function Post({ link, title, createdAt }) {
+function Post({ link, post }) {
   return (
     <div>
-      <Link to={link}>{title}</Link>
-      <h3>{createdAt}</h3>
+      <Link to={link}>{post.title}</Link>
+      <h3>{post.createdAt}</h3>
     </div>
   );
 }

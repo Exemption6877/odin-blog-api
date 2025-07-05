@@ -52,28 +52,26 @@ function Login() {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          onChange={handleTyping}
-          value={credentials.username}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleTyping}
-          value={credentials.password}
-        />
-        <input type="submit" value="submit" />
-      </form>
-    </>
+      <label htmlFor="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        onChange={handleTyping}
+        value={credentials.username}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        onChange={handleTyping}
+        value={credentials.password}
+      />
+      <input type="submit" value="submit" />
+    </form>
   );
 }
 

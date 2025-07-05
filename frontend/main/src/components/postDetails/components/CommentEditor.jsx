@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AuthContext from "../../../context/authContext";
 
-function CommentEditor({ value, postId, commentId }) {
-  const API_URL = import.meta.env.VITE_API_URL;
-  const [content, setContent] = useState(value);
+const API_URL = import.meta.env.VITE_API_URL;
+
+function CommentEditor({ comment }) {
+  const [content, setContent] = useState(comment.content);
+  const [error, setError] = useState(null);
 
   const { token } = useContext(AuthContext);
 
@@ -12,11 +13,9 @@ function CommentEditor({ value, postId, commentId }) {
     setContent(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const res = await fetch(
-      `${API_URL}/posts/${postId}/comments/${commentId}`,
+      `${API_URL}/posts/${comment.postId}/comments/${comment.id}`,
       {
         method: "PUT",
         headers: {
@@ -29,22 +28,23 @@ function CommentEditor({ value, postId, commentId }) {
       }
     );
 
-    if (res.status !== 200) {
-      return new Error("error updating comment");
+    if (!res.ok) {
+      const errorData = await res.json();
+      setError(errorData.error);
+      return;
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          name="updatedText"
-          value={content}
-          onChange={handleTyping}
-        ></textarea>
-        <input type="submit" value="submit" />
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
+      <textarea
+        name="updatedText"
+        value={content}
+        onChange={handleTyping}
+      ></textarea>
+      <input type="submit" value="submit" />
+    </form>
   );
 }
 

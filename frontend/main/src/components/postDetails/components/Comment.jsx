@@ -1,8 +1,8 @@
-import CommentEditor from "./CommentEditor";
 import { useState } from "react";
+import CommentEditor from "./CommentEditor";
 
-function Comment({ username, content, currentUser, commentId, postId }) {
-  const isOwner = username === currentUser;
+function Comment({ comment, currentUser }) {
+  const isOwner = comment.user.username === currentUser;
   const [edit, setEdit] = useState(false);
 
   const toggleEdit = () => {
@@ -10,11 +10,9 @@ function Comment({ username, content, currentUser, commentId, postId }) {
   };
   return (
     <div>
-      <p>{username}</p>
-      <p>{content}</p>
-      {edit && (
-        <CommentEditor value={content} commentId={commentId} postId={postId} />
-      )}
+      <p>{comment.user.username}</p>
+      <p>{comment.content}</p>
+      {edit && <CommentEditor comment={comment} />}
       {isOwner && <button onClick={toggleEdit}>Edit</button>}
     </div>
   );
