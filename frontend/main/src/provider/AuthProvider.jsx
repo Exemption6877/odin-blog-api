@@ -19,6 +19,7 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("username");
 
     setToken(null);
+    setUsername(null);
   };
 
   return (
