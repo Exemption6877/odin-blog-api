@@ -1,12 +1,12 @@
-import styles from "./Nav.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../context/authContext";
+import styles from "./Nav.module.css";
 
 function Nav() {
   const { username, token, logout } = useContext(AuthContext);
   return (
-    <nav>
+    <nav className={styles.navBlock}>
       <ul className={styles.linksWrapper}>
         <li>
           <Link to="/">Home</Link>
