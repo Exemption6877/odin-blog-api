@@ -26,7 +26,7 @@ app.use("/posts", postsRouter);
 app.use("/", authRouter);
 
 // Admin routes
-app.use("/admin/user", usersRouter);
+app.use("/admin/", usersRouter);
 
 app.listen(PORT, () => {
   console.log(`API is online at port ${PORT}`);
