@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Error from "../../Error/Error";
 import AuthContext from "../../../context/authContext";
 import styles from "../Auth.module.css";
 
@@ -54,7 +55,6 @@ function Login() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.formBlock}>
-      {error && <p>{error}</p>}
       <h2>Log In</h2>
       <label htmlFor="username">Username</label>
       <input
@@ -72,6 +72,8 @@ function Login() {
         onChange={handleTyping}
         value={credentials.password}
       />
+      {error && <Error msg={error} />}
+
       <input type="submit" value="Log In" />
       <p>
         Do not have an account?{" "}

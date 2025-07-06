@@ -45,4 +45,10 @@ input[type="password"] {
 .authLink {
   color: var(--text-black-color);
   text-decoration: none;
+  background-color: var(--secondary-button-color);
+  border: none;
+  border-radius: var(--button-radius);
+  padding: var(--nav-button-padding);
+  cursor: pointer;
+  font-weight: 500;
 }

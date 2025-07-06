@@ -3,6 +3,7 @@
 :root {
   --bg-color: #121212;
   --bg-focused-color: #232324;
+  --bg-error: #cf6679;
   --accent-color: #339cff;
   --text-primary-color: #e0e0e0;
   --text-white-color: #ffffff;
@@ -23,6 +24,7 @@
   --post-radius: 1ch;
   --min-content-width: 600px;
   --textarea-radius: 1ch;
+  --error-gap: 0.5rem;
 }
 
 body,

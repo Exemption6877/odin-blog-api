@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Comments.module.css";
+import Error from "../../Error/Error";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -34,7 +35,6 @@ function NewComment({ token, postId }) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.newCommentBlock}>
-      {error && <p>{error}</p>}
       <h3>New Comment</h3>
       <textarea
         name="commentText"
@@ -42,6 +42,7 @@ function NewComment({ token, postId }) {
         value={content}
         onChange={handleTyping}
       ></textarea>
+      {error && <Error msg={error} />}
       <input type="submit" value="Submit" className={styles.newCommentBtn} />
     </form>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Error from "../../Error/Error";
 import styles from "../Auth.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -60,7 +61,6 @@ function Signup() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.formBlock}>
-      {error && <p>{error}</p>}
       <h2>Sign Up</h2>
       <label htmlFor="username">Username</label>
       <input
@@ -86,6 +86,8 @@ function Signup() {
         onChange={handleTyping}
         value={credentials.confirmPassword}
       />
+      {error && <Error msg={error} />}
+
       <input type="submit" value="Sign Up" />
       <p>
         Already registered?{" "}

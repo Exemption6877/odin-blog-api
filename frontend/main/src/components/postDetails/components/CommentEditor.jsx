@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../../context/authContext";
 import styles from "./Comments.module.css";
+import Error from "../../Error/Error";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -44,6 +45,8 @@ function CommentEditor({ comment }) {
         value={content}
         onChange={handleTyping}
       ></textarea>
+      {error && <Error msg={error} />}
+
       <input type="submit" value="submit" className={styles.newCommentBtn} />
     </form>
   );
