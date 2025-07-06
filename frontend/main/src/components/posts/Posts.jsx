@@ -1,5 +1,6 @@
 import useFetch from "../../../hooks/useFetch";
 import Post from "./components/Post";
+import styles from "./Posts.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -11,7 +12,7 @@ function Posts() {
   if (!data) return <p>Post Not Found </p>;
 
   return (
-    <div>
+    <div className={styles.postsWrapper}>
       {data.map((post) => (
         <Post key={post.id} link={`/posts/${post.id}`} post={post} />
       ))}

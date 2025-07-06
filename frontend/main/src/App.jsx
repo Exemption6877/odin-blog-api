@@ -7,7 +7,9 @@ function App() {
   return (
     <div className={styles.appWrapper}>
       <Nav />
-      <Outlet />
+      <div className={styles.contentWrapper}>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

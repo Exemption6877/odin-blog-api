@@ -2,6 +2,7 @@
 
 :root {
   --bg-color: #121212;
+  --bg-focused-color: #232324;
   --accent-color: #339cff;
   --text-primary-color: #e0e0e0;
   --text-white-color: #ffffff;
@@ -10,6 +11,15 @@
   --auth-padding: 3.5rem;
   --auth-gap: 1rem;
   --auth-radius: 0.5ch;
+  --layout-padding: 0.5rem;
+  --posts-gap: 1rem;
+  --post-title-size: 2rem;
+  --post-radius: 1ch;
+  --post-padding: 1rem;
+  --margin-from-nav: 2rem;
+  --nav-button-radius: 1ch;
+  --nav-button-padding: 0.3rem;
+  --footer-padding: 0.5rem;
 }
 
 body,
@@ -18,7 +28,7 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: Roboto, "Times New Roman";
+  font-family: Roboto, sans-serif;
 }
 
 body {
@@ -26,5 +36,5 @@ body {
   color: var(--text-primary-color);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
