@@ -61,4 +61,38 @@ async function login(req, res) {
   }
 }
 
-module.exports = { signUp, login };
+async function adminLogin(req, res) {
+  try {
+    const { username, password } = req.body;
+    const user = await db.auth.getByName(username);
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials." });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid credentials." });
+    }
+
+    if (user.role !== "ADMIN") {
+      return res.status(403).json({ error: "User is not an administrator." });
+    }
+
+    jwt.sign(
+      { id: user.id, username: user.username, role: user.role },
+      JWT_SECRET,
+      { expiresIn: "1h" },
+      (err, token) => {
+        res.json({
+          token,
+        });
+      }
+    );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not login user." });
+  }
+}
+
+module.exports = { signUp, login, adminLogin };
