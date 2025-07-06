@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL);
+
 function Login() {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -23,6 +26,24 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const res = await fetch(`${API_URL}/admin/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: credentials.username,
+        password: credentials.password,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      setError(errorData.error);
+      return;
+    }
+    console.log(res);
   };
 
   return (
