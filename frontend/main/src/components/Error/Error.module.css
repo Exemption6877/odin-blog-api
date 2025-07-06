@@ -1,0 +1,26 @@
+.errorBlock {
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
+  background-color: var(--bg-error);
+  border-radius: var(--post-radius);
+  padding: var(--post-padding);
+  gap: var(--error-gap);
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--margin-from-nav);
+}
+
+.errorBlock > div {
+  display: flex;
+  border: 2px var(--text-white-color) solid;
+  border-radius: 100ch;
+  color: var(--text-white-color);
+  width: 25px;
+  height: 25px;
+  justify-content: center;
+}
+
+.errorBlock > p {
+  color: var(--text-white-color);
+}
