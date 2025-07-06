@@ -1,0 +1,30 @@
+import AuthContext from "../context/AuthContext";
+import { useState } from "react";
+
+export default function AuthProvider({ children }) {
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [username, setUsername] = useState(() =>
+    localStorage.getItem("username")
+  );
+
+  const login = (token, username) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username);
+
+    setUsername(username);
+    setToken(token);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setToken(null);
+    setUsername(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ token, username, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}

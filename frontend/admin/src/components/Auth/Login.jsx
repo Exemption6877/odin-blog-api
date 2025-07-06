@@ -1,7 +1,8 @@
+import { useContext } from "react";
 import { useState } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
-console.log(API_URL);
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -10,6 +11,8 @@ function Login() {
   });
 
   const [error, setError] = useState(null);
+
+  const { login } = useContext(AuthContext);
 
   const handleTyping = (e) => {
     const { name, value } = e.target;
@@ -43,7 +46,9 @@ function Login() {
       setError(errorData.error);
       return;
     }
-    console.log(res);
+
+    const data = await res.json();
+    login(data.token, credentials.username);
   };
 
   return (
