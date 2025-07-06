@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CommentEditor from "./CommentEditor";
+import styles from "./Comments.module.css";
 
 function Comment({ comment, currentUser }) {
   const isOwner = comment.user.username === currentUser;
@@ -9,11 +10,15 @@ function Comment({ comment, currentUser }) {
     setEdit(!edit);
   };
   return (
-    <div>
-      <p>{comment.user.username}</p>
-      <p>{comment.content}</p>
+    <div className={styles.comment}>
+      <h3>{comment.user.username}</h3>
+      {!edit && <p>{comment.content}</p>}
       {edit && <CommentEditor comment={comment} />}
-      {isOwner && <button onClick={toggleEdit}>Edit</button>}
+      {isOwner && (
+        <button onClick={toggleEdit} className={styles.editCommentBtn}>
+          Edit
+        </button>
+      )}
     </div>
   );
 }

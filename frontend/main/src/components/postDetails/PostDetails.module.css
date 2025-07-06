@@ -1,0 +1,15 @@
+.postDetailsBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-focused-color);
+  min-width: var(--min-content-width);
+  border-radius: var(--post-radius);
+  padding: var(--post-padding);
+  margin-top: var(--margin-from-nav);
+  gap: var(--posts-gap);
+}
+
+.postDetailsBlock > a {
+  text-decoration: none;
+  color: var(--text-main-color);
+}

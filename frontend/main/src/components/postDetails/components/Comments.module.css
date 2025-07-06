@@ -1,0 +1,47 @@
+.commentsBlock,
+.newCommentBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-focused-color);
+  min-width: var(--min-content-width);
+  border-radius: var(--post-radius);
+  padding: var(--post-padding);
+}
+
+.commentsBlock {
+  gap: var(--posts-gap);
+  margin-bottom: var(--margin-from-nav);
+}
+
+.newCommentBlock {
+  gap: var(--posts-gap);
+}
+
+.commentsBlock > textarea,
+.newCommentBlock > textarea {
+  border-radius: var(--textarea-radius);
+  min-height: 75px;
+}
+
+.newCommentBtn,
+.editCommentBtn {
+  background-color: var(--secondary-button-color);
+  border: none;
+  border-radius: var(--button-radius);
+  padding: var(--nav-button-padding);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.editCommentBtn {
+  margin-top: var(--post-padding);
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  padding: var(--post-padding);
+  border-radius: var(--post-radius);
+  gap: var(--posts-gap);
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Comments.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -32,15 +33,16 @@ function NewComment({ token, postId }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.newCommentBlock}>
       {error && <p>{error}</p>}
+      <h3>New Comment</h3>
       <textarea
         name="commentText"
         id="commentText"
         value={content}
         onChange={handleTyping}
       ></textarea>
-      <input type="submit" value="submit" />
+      <input type="submit" value="Submit" className={styles.newCommentBtn} />
     </form>
   );
 }

@@ -14,7 +14,9 @@ function Nav() {
 
         {token ? (
           <>
-            <li>{username}</li>
+            <li>
+              <p>{username}</p>
+            </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

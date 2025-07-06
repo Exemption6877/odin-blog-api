@@ -17,9 +17,12 @@
   --post-radius: 1ch;
   --post-padding: 1rem;
   --margin-from-nav: 2rem;
-  --nav-button-radius: 1ch;
+  --button-radius: 1ch;
   --nav-button-padding: 0.3rem;
   --footer-padding: 0.5rem;
+  --post-radius: 1ch;
+  --min-content-width: 600px;
+  --textarea-radius: 1ch;
 }
 
 body,
