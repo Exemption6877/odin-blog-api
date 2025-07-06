@@ -9,11 +9,11 @@ function Posts() {
   const { error, loading, data } = useFetch(`${API_URL}/posts`);
 
   if (loading) return <p>Loading...</p>;
+  if (!data) return <Error msg={error} />;
 
   return (
     <div className={styles.postsWrapper}>
       {error && <Error msg={error} />}
-      {!data && <Error msg={"Posts not found."} />}
       {data.map((post) => (
         <Post key={post.id} link={`/posts/${post.id}`} post={post} />
       ))}

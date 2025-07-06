@@ -8,6 +8,7 @@
   gap: var(--error-gap);
   align-items: center;
   justify-content: center;
+  margin-top: var(--margin-from-nav);
 }
 
 .errorBlock > div {

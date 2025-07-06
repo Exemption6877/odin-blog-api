@@ -11,7 +11,7 @@ function Comments({ postId, currentUser }) {
   );
 
   if (loading) return <div>Loading...</div>;
-  if (!data || data.length === 0) return <div>Comment Not Found.</div>;
+  if (!data || data.length === 0) return <Error msg={error} />;
 
   return (
     <div className={styles.commentsBlock}>

@@ -15,7 +15,7 @@ function PostDetails() {
   const { error, loading, data } = useFetch(`${API_URL}/posts/${postId}`);
 
   if (loading) return <div>Loading...</div>;
-  if (!data) return <div>Post Not Found.</div>;
+  if (!data) return <Error msg={error} />;
 
   return (
     <>
