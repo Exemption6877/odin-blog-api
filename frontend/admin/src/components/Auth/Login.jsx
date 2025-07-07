@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -49,6 +51,7 @@ function Login() {
 
     const data = await res.json();
     login(data.token, credentials.username);
+    navigate("/posts");
   };
 
   return (
@@ -67,7 +70,7 @@ function Login() {
         onChange={handleTyping}
         value={credentials.password}
       />
-
+      {error && <div>{error}</div>}
       <input type="submit" value="Submit" />
     </form>
   );
