@@ -1,6 +1,7 @@
 import App from "../../admin/src/App";
 import Login from "./components/Auth/Login";
 import AuthRoute from "../../admin/src/ProtectedRoute";
+import Posts from "./components/Posts/Posts";
 
 const routes = [
   { path: "/", element: <Login /> },
@@ -11,6 +12,7 @@ const routes = [
         <App />
       </AuthRoute>
     ),
+    children: [{ index: true, element: <Posts /> }],
   },
 ];
 export default routes;

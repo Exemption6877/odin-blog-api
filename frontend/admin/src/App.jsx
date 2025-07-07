@@ -1,7 +1,12 @@
-import Login from "./components/Auth/Login";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  return <Login />;
+  return (
+    <div>
+      <h1>Admin Panel</h1>
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
