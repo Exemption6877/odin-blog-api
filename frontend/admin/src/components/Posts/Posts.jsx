@@ -1,11 +1,43 @@
+import { useState } from "react";
 import Post from "./components/Post";
+import { useEffect } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Posts() {
-  const posts = [];
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const res = await fetch(`${API_URL}/posts/`, {
+          method: "GET",
+        });
+
+        if (!res.ok) {
+          setError(res.json());
+        }
+
+        const data = await res.json();
+        setPosts(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    }
+
+    fetchPosts();
+  }, []);
 
   if (posts.length === 0) {
     return <p>No posts yet!</p>;
   }
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>

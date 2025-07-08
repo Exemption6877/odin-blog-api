@@ -12,7 +12,7 @@ const routes = [
         <App />
       </AuthRoute>
     ),
-    children: [{ index: true, element: <Posts /> }],
+    children: [{ index: true, element: <Posts /> }, { path: ":postId" }],
   },
 ];
 export default routes;
