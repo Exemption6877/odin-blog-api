@@ -24,7 +24,7 @@ function Posts() {
         setPosts(data);
         setLoading(false);
       } catch (err) {
-        setError(err);
+        setError(err.msg);
         setLoading(false);
       }
     }
