@@ -40,13 +40,10 @@ function Comments({ postId }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  if (comments.length === 0) {
-    return <p>No comments yet!</p>;
-  }
-
   return (
     <div>
       <h2>Comments</h2>
+      {comments.length === 0 && <p>No comments yet!</p>}
       <NewComment postId={postId} />
 
       {comments.map((comment) => (
