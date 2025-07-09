@@ -1,8 +1,0 @@
-.footer {
-  display: flex;
-  color: var(--text-white-color);
-  background-color: var(--accent-color);
-  justify-content: center;
-  padding: var(--footer-padding);
-  font-weight: 500;
-}
