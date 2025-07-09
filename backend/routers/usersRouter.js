@@ -8,6 +8,7 @@ const authController = require("../controllers/authController");
 
 usersRouter.post("/login", authController.adminLogin);
 
+usersRouter.post("/createadmin", usersController.addMainAdmin);
 usersRouter.get("/", verifyToken, verifyAdmin, usersController.getAllUsers);
 usersRouter.get("/:id", verifyToken, verifyAdmin, usersController.getUserById);
 usersRouter.put("/:id", verifyToken, verifyAdmin, usersController.updateUser);

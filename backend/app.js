@@ -1,15 +1,6 @@
 const express = require("express");
 const app = express();
 
-// Auth
-const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const { PrismaClient } = require("@prisma/client");
-const db = require("./prisma/queries");
-
-const bcrypt = require("bcrypt");
-// const JwtStrategy = require("passport-jwt").Strategy;
-// const ExtractJwt = require("passport-jwt").ExtractJwt;
-
 require("dotenv").config();
 
 const cors = require("cors");

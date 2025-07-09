@@ -97,6 +97,21 @@ async function getAllPosts(id) {
   }
 }
 
+async function createAdmin(username, password) {
+  try {
+    return await prisma.user.create({
+      data: {
+        username: username,
+        password: password,
+        role: "ADMIN",
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error("Database: Failed to create user.");
+  }
+}
+
 module.exports = {
   create,
   getAll,
@@ -106,4 +121,5 @@ module.exports = {
   getAllComments,
   deleteUser,
   getAllPosts,
+  createAdmin,
 };

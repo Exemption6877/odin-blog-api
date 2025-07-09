@@ -1,4 +1,6 @@
 const db = require("../prisma/queries");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 // TODO: middleware for role approval instead of if statement here.
 
@@ -150,6 +152,27 @@ async function getAllComments(req, res) {
   }
 }
 
+async function addMainAdmin(req, res) {
+  try {
+    const username = process.env.ADMIN_USERNAME;
+    const password = process.env.ADMIN_PASSWORD;
+
+    const user = await db.auth.getByName(username);
+
+    if (user) {
+      return res.status(403).json({ error: "User already exists." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    await db.users.createAdmin(username, hashedPassword);
+    res.status(200).json({ message: "Admin user has been created." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to add admin." });
+  }
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -157,4 +180,5 @@ module.exports = {
   deleteUser,
   getAllPosts,
   getAllComments,
+  addMainAdmin,
 };
