@@ -1,4 +1,4 @@
-function PostContent(post) {
+function PostContent({ post }) {
   return (
     <>
       <h2>{post.title}</h2>
