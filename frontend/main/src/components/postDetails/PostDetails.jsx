@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useContext } from "react";
 import useFetch from "../../../hooks/useFetch";
 import Comments from "./components/Comments";
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import NewComment from "./components/NewComment";
 import styles from "./PostDetails.module.css";
 import Error from "../Error/Error";
