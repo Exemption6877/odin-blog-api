@@ -95,6 +95,7 @@ async function updateComment(req, res) {
 async function deleteComment(req, res) {
   try {
     const commentId = Number(req.params.id);
+    const postId = Number(req.params.postId);
 
     const comment = await db.comments.getByIdAndPostId(commentId, postId);
 
