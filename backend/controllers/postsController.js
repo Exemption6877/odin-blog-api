@@ -79,7 +79,7 @@ async function updatePost(req, res) {
 async function deletePost(req, res) {
   try {
     const postId = Number(req.params.id);
-    const post = await findById(postId);
+    const post = await db.posts.findById(postId);
 
     if (!post) {
       return res.status(404).json({ error: "Post not found." });
