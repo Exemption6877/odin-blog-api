@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Error from "../../Error/Error";
-import AuthContext from "../../../context/authContext";
+import AuthContext from "../../../context/AuthContext";
 import styles from "../Auth.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
