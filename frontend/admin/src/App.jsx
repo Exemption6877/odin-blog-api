@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Nav from "./components/layout/nav";
 import Footer from "./components/layout/footer";
+import styles from "./App.module.css";
 
 function App() {
   return (
-    <div>
+    <div className={styles.appWrapper}>
       <Nav />
-      <Outlet />
+      <div className={styles.contentWrapper}>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
