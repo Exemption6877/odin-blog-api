@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import NewComment from "./Components/NewComment";
-import DelCommentBtn from "./Components/DelCommentBtn";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import Comment from "./Components/Comment";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -50,18 +50,12 @@ function Comments({ postId }) {
       <NewComment postId={postId} />
 
       {comments.map((comment) => (
-        <div key={comment.id}>
-          <p>{comment.user.username}</p>
-          <p>{comment.createdAt}</p>
-          <p>{comment.content}</p>
-          <div>
-            <DelCommentBtn
-              commentId={comment.id}
-              postId={postId}
-              token={token}
-            />
-          </div>
-        </div>
+        <Comment
+          key={comment.id}
+          comment={comment}
+          token={token}
+          postId={postId}
+        />
       ))}
     </div>
   );
