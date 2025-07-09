@@ -36,16 +36,14 @@ function Posts() {
     fetchPosts();
   }, []);
 
-  if (posts.length === 0) {
-    return <p>No posts yet!</p>;
-  }
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className={styles.postsWrapper}>
       <NewPost />
+
+      {posts.length === 0 && <p>No posts yet!</p>}
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
