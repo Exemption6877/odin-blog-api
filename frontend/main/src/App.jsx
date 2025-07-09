@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styles from "./App.module.css";
-import Footer from "./components/layout/Footer";
-import Nav from "./components/layout/Nav";
+import Footer from "./components/Layout/Footer";
+import Nav from "./components/Layout/Nav";
 
 function App() {
   return (
