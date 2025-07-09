@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import AuthContext from "../../../context/authContext";
+import AuthContext from "../../../context/AuthContext";
 import styles from "./Comments.module.css";
 import Error from "../../Error/Error";
 
