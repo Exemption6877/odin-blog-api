@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import Comments from "../Comments/Comments";
+import PostContent from "./components/PostContent";
+import DeletePost from "./components/DeletePost";
+import AuthContext from "../../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -10,6 +13,8 @@ function PostDetails() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchPost() {
@@ -42,10 +47,11 @@ function PostDetails() {
     <>
       <div>
         <Link to={"/posts"}>Go Back</Link>
-        <h2>{post.title}</h2>
-        <p>{String(post.published)}</p>
-        <p>{post.createdAt}</p>
-        <p>{post.content}</p>
+        <PostContent post={post} />
+
+        <div>
+          <DeletePost postId={postId} token={token} />
+        </div>
       </div>
       <Comments postId={postId} />
     </>
