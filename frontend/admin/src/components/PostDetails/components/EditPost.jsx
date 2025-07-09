@@ -34,7 +34,10 @@ function EditPost({ token, post }) {
       if (!res.ok) {
         const data = await res.json();
         setError(data.error);
+        return;
       }
+
+      window.location.reload();
     } catch (err) {
       setError(err.msg);
     }
