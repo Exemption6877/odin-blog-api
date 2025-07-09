@@ -1,0 +1,47 @@
+.commentsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--accent-bg);
+  padding: var(--posts-editor-padding);
+  border-radius: 1ch;
+}
+
+.commentsWrapper > h2 {
+  align-self: center;
+}
+
+.newComment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.newComment > input {
+  border-radius: 1ch;
+}
+
+.commentBtnWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.commentBtn,
+.newComment > input[type="submit"] {
+  align-self: center;
+  background-color: var(--button-bg);
+  border: none;
+  border-radius: 1ch;
+  padding: var(--btn-padding);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.editComment {
+  display: flex;
+  flex-direction: column;
+}

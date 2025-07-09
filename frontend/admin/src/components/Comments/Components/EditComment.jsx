@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../Comments.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -42,7 +43,7 @@ function EditComment({ postId, commentId, token, prevValue }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.newComment}>
       <h3>Edit Comment:</h3>
       <input
         type="text"

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DelCommentBtn from "./DelCommentBtn";
 import EditComment from "./EditComment";
+import styles from "../Comments.module.css";
 
 function Comment({ comment, token, postId }) {
   const [editing, setEditing] = useState(false);
@@ -26,8 +27,10 @@ function Comment({ comment, token, postId }) {
         </div>
       )}
 
-      <div>
-        <button onClick={toggleEdit}>Edit</button>
+      <div className={styles.commentBtnWrapper}>
+        <button onClick={toggleEdit} className={styles.commentBtn}>
+          Edit
+        </button>
         <DelCommentBtn token={token} commentId={comment.id} postId={postId} />
       </div>
     </div>

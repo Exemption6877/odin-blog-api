@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../Comments.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,7 +31,11 @@ function DelCommentBtn({ postId, commentId, token }) {
     }
   };
 
-  return <button onClick={handleClick}>{error ? error : "Delete"}</button>;
+  return (
+    <button onClick={handleClick} className={styles.commentBtn}>
+      {error ? error : "Delete"}
+    </button>
+  );
 }
 
 export default DelCommentBtn;

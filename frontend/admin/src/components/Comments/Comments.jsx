@@ -3,6 +3,7 @@ import NewComment from "./Components/NewComment";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Comment from "./Components/Comment";
+import styles from "./Comments.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -41,7 +42,7 @@ function Comments({ postId }) {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className={styles.commentsWrapper}>
       <h2>Comments</h2>
       {comments.length === 0 && <p>No comments yet!</p>}
       <NewComment postId={postId} />

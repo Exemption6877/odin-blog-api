@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
+import styles from "../Comments.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -43,7 +44,7 @@ function NewComment({ postId }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.newComment}>
       <input
         type="text"
         name="commentContent"
