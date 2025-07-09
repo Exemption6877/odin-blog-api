@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -51,7 +51,6 @@ function NewPost() {
 
   return (
     <form onSubmit={handleSubmit}>
-        
       <h2>Create new post</h2>
       <label htmlFor="title">Title</label>
       <input

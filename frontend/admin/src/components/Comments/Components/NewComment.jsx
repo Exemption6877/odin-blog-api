@@ -48,6 +48,7 @@ function NewComment({ postId }) {
         onChange={handleTyping}
         value={comment}
       />
+      {error && <p>Error: {error}</p>}
       <input type="submit" value="Create new comment" />
     </form>
   );
