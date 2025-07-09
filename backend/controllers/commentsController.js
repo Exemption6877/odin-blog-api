@@ -80,7 +80,7 @@ async function updateComment(req, res) {
       return res.status(404).json({ error: "Comment not found." });
     }
 
-    if (comment.userId !== userId) {
+    if (comment.userId !== userId && userRole !== "ADMIN") {
       return res.status(403).json({ error: "Insufficient privileges." });
     }
 
