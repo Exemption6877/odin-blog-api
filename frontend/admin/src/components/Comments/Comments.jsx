@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import NewComment from "./Components/NewComment";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -41,6 +42,8 @@ function Comments({ postId }) {
   return (
     <div>
       <h2>Comments</h2>
+      <NewComment postId={postId} />
+
       {comments.map((comment) => (
         <div>
           <p>{comment.user.username}</p>
