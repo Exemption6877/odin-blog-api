@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../PostDetails.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -44,8 +45,8 @@ function EditPost({ token, post }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Edit post:</h3>
+    <form onSubmit={handleSubmit} className={styles.postEdit}>
+      <h2>Edit post</h2>
       <label htmlFor="title">Title</label>
       <input
         type="text"
@@ -71,7 +72,7 @@ function EditPost({ token, post }) {
         value={updatedContent.content}
       />
       {error && <p>Error: {error}</p>}
-      <input type="submit" value="Edit post" />
+      <input type="submit" value="Edit post" className={styles.postBtn} />
     </form>
   );
 }

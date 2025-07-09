@@ -5,6 +5,7 @@ import PostContent from "./components/PostContent";
 import DeletePost from "./components/DeletePost";
 import AuthContext from "../../context/AuthContext";
 import EditPost from "./components/EditPost";
+import styles from "./PostDetails.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -52,8 +53,8 @@ function PostDetails() {
 
   return (
     <>
-      <div>
-        <Link to={"/posts"}>Go Back</Link>
+      <div className={styles.post}>
+        <Link to={"/posts"}>{" < "}Go Back</Link>
 
         {editing ? (
           <EditPost post={post} token={token} />
@@ -61,8 +62,10 @@ function PostDetails() {
           <PostContent post={post} />
         )}
 
-        <div>
-          <button onClick={toggleEdit}>Edit</button>
+        <div className={styles.postBtnWrapper}>
+          <button onClick={toggleEdit} className={styles.postBtn}>
+            Edit
+          </button>
           <DeletePost postId={postId} token={token} />
         </div>
       </div>

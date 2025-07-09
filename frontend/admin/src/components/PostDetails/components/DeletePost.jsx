@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../PostDetails.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -27,7 +28,11 @@ function DeletePost({ postId, token }) {
     }
   };
 
-  return <button onClick={handleClick}>{error ? error : "Delete"}</button>;
+  return (
+    <button onClick={handleClick} className={styles.postBtn}>
+      {error ? error : "Delete"}
+    </button>
+  );
 }
 
 export default DeletePost;
