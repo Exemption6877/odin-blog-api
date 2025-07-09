@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import Comments from "../Comments/Comments";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -31,7 +32,7 @@ function PostDetails() {
     }
 
     fetchPost();
-  }, []);
+  }, [postId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -46,8 +47,7 @@ function PostDetails() {
         <p>{post.createdAt}</p>
         <p>{post.content}</p>
       </div>
-
-      <h3>Comments</h3>
+      <Comments postId={postId} />
     </>
   );
 }

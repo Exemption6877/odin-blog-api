@@ -18,7 +18,9 @@ function Posts() {
         });
 
         if (!res.ok) {
-          setError(res.json());
+          const error = await res.json();
+          setLoading(false);
+          setError(error.error);
         }
 
         const data = await res.json();
