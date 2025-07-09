@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import styles from "./Auth.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -55,24 +56,28 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        onChange={handleTyping}
-        value={credentials.username}
-      />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        onChange={handleTyping}
-        value={credentials.password}
-      />
-      {error && <div>{error}</div>}
-      <input type="submit" value="Submit" />
-    </form>
+    <div className={styles.authWrapper}>
+      <form onSubmit={handleSubmit} className={styles.login}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          onChange={handleTyping}
+          value={credentials.username}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={handleTyping}
+          value={credentials.password}
+        />
+        {error && <div>{error}</div>}
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   );
 }
 

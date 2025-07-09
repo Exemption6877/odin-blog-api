@@ -1,0 +1,30 @@
+.authWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.login {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--accent-bg);
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.login > input {
+  border-radius: 1ch;
+}
+
+.login > input[type="submit"] {
+  align-self: center;
+  background-color: var(--button-bg);
+  border: none;
+  border-radius: 1ch;
+  padding: var(--btn-padding);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
