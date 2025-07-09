@@ -2,6 +2,7 @@ import { useState } from "react";
 import Post from "./components/Post";
 import { useEffect } from "react";
 import NewPost from "./components/NewPost";
+import styles from "./Posts.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -43,7 +44,7 @@ function Posts() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className={styles.postsWrapper}>
       <NewPost />
       {posts.map((post) => (
         <Post key={post.id} post={post} />

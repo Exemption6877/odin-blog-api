@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
+import styles from "../Posts.module.css";
 
 function Post({ post }) {
   return (
-    <div>
+    <div className={styles.post}>
       <Link to={`/posts/${post.id}`}>{post.title}</Link>
-      <p>{String(post.published)}</p>
+      <p>{post.published ? "Published" : "Not Published"}</p>
       <p>{post.createdAt}</p>
-      <p>{post.content}</p>
     </div>
   );
 }

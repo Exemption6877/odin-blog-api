@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
+import styles from "../Posts.module.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -53,7 +54,7 @@ function NewPost() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.postsEditor}>
       <h2>Create new post</h2>
       <label htmlFor="title">Title</label>
       <input
@@ -80,7 +81,7 @@ function NewPost() {
         checked={post.content}
       />
       {error && <p>Error: {error}</p>}
-      <input type="submit" value="Create new post" />
+      <input type="submit" value="Submit" />
     </form>
   );
 }
