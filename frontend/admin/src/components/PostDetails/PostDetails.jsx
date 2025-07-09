@@ -4,6 +4,7 @@ import Comments from "../Comments/Comments";
 import PostContent from "./components/PostContent";
 import DeletePost from "./components/DeletePost";
 import AuthContext from "../../context/AuthContext";
+import EditPost from "./components/EditPost";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -13,6 +14,12 @@ function PostDetails() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [editing, setEditing] = useState(false);
+
+  const toggleEdit = () => {
+    setEditing(!editing);
+  };
 
   const { token } = useContext(AuthContext);
 
@@ -47,9 +54,15 @@ function PostDetails() {
     <>
       <div>
         <Link to={"/posts"}>Go Back</Link>
-        <PostContent post={post} />
+
+        {editing ? (
+          <EditPost post={post} token={token} />
+        ) : (
+          <PostContent post={post} />
+        )}
 
         <div>
+          <button onClick={toggleEdit}>Edit</button>
           <DeletePost postId={postId} token={token} />
         </div>
       </div>
