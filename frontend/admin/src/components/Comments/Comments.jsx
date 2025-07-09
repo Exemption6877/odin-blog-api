@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import NewComment from "./Components/NewComment";
+import DelCommentBtn from "./Components/DelCommentBtn";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -7,6 +10,8 @@ function Comments({ postId }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchComments() {
@@ -32,12 +37,12 @@ function Comments({ postId }) {
     fetchComments();
   }, [postId]);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   if (comments.length === 0) {
     return <p>No comments yet!</p>;
   }
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
@@ -45,10 +50,17 @@ function Comments({ postId }) {
       <NewComment postId={postId} />
 
       {comments.map((comment) => (
-        <div>
+        <div key={comment.id}>
           <p>{comment.user.username}</p>
           <p>{comment.createdAt}</p>
           <p>{comment.content}</p>
+          <div>
+            <DelCommentBtn
+              commentId={comment.id}
+              postId={postId}
+              token={token}
+            />
+          </div>
         </div>
       ))}
     </div>
