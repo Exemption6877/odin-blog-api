@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -40,7 +40,9 @@ function PostDetails() {
   return (
     <>
       <div>
+        <Link to={"/posts"}>Go Back</Link>
         <h2>{post.title}</h2>
+        <p>{String(post.published)}</p>
         <p>{post.createdAt}</p>
         <p>{post.content}</p>
       </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Post from "./components/Post";
 import { useEffect } from "react";
+import NewPost from "./components/NewPost";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -41,6 +42,7 @@ function Posts() {
 
   return (
     <div>
+      <NewPost />
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
